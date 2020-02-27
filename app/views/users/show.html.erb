@@ -1,0 +1,90 @@
+<!-- ユーザープロフィール -->
+<div class="row">
+  <div class="col-xs-3">
+      <h3>User info</h3>
+
+        <table class="table">
+          <tbody>
+            <%= attachment_image_tag @user, :profile_image, :fill , 60,60, format: 'jpeg' %>
+            <tr>
+              <td><%= @user.name %></td>
+            </tr>
+            <tr>
+              <td><%= @user.introduction %></td>
+            </tr>
+            <tr>
+              <td>
+                <%= link_to "フォロー #{@user.followings.count}" , following_user_path(@user.id) %> /
+                <%= link_to "フォロワー#{@user.followers.count}", follower_user_path(@user.id) %></td>
+            </tr>
+            <tr>
+              <td><%= link_to favorites_user_path(@user),class:"btn btn-default btn-block" do%>
+                <span class="glyphicon glyphicon-heart" aria-hidden="true" style="colod:red"></span>いいね一覧
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <% if @user == current_user %>
+          <%= link_to edit_user_path, class:"btn btn-default btn-block" do%>
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+          <% end %>
+        <% else %>
+          <%= link_to user_path(current_user), class:"btn btn-default btn-block" do %>
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+          <% end %>
+        <% end %>
+
+      <h3>New book</h3>
+
+      <!-- 投稿画面 -->
+      <%= form_for(@book) do |f| %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title ,class:"form-control"%>  
+        </div>
+
+        <div class="form-group">
+          <%= f.label :body,"Opinion" %>
+          <%= f.text_area :body,class:"form-control" %>
+        </div>
+
+        <%= f.submit "Create Book",class:"btn btn-primary btn-block" %>
+      <% end %>
+  </div>
+
+  <!-- 投稿一覧画面 -->
+  <div class="col-xs-9">
+    <% if current_user != @user %>
+      <% if current_user.follow?(@user) %>
+            <%= link_to "UnFollow",destroy_follow_path(@user),method: :delete,class:"btn btn-default btn-block" %>    
+      <% else %>
+            <%= link_to "Follow!",post_follow_path(@user),method: :post,class:"btn btn-info btn-block" %>
+      <% end %>
+    <% end %>
+    <h3>Books</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Opinion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do %>
+                <%= attachment_image_tag @user, :profile_image, :fill , 60,60, format: 'jpeg' %>
+              <% end %>              
+            </td>
+            <td><%= link_to book.title, book_path(book) %></td>
+            <td><%= book.body %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>          
+  </div>
+</div>
+

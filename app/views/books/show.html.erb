@@ -1,0 +1,67 @@
+
+<div class="row">    
+  <h2>Book detail</h2>
+    <table class="table">
+      <thead>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= attachment_image_tag @user, :profile_image, :fill, 80,80, format: 'jpeg', fallback: "no_image.jpg" %></td>
+          <td><%= @book.title%></td>
+          <td><%= @book.body%></td>
+          <td>
+            <% if @user == current_user %>
+              <td><%= link_to "Edit", edit_book_path(@book), class:"btn btn-primary"%></td>
+              <td><%= link_to "Destroy", book_path(@book),method: :delete, class:"btn btn-danger"%></td>
+            <% end %>
+
+          <td>
+            <% if @book.favorited_by?(@user) %>
+              <%= link_to book_favorites_path(@book), method: :delete do%>
+                <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+
+                <%= @book.favorites.count %>いいね
+              <% end %>
+            <% else %>
+              <%= link_to book_favorites_path(@book), method: :post do%>
+                <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: black;"></span>
+                <%= @book.favorites.count %>いいね
+              <% end %>
+
+            <% end %>
+        </tr>
+      </tbody>
+    </table>  
+  </div>
+
+<div class="row">
+  <h2>Comment</h2>
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ユーザ</th>
+          <th>コメント</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+        <tr>
+          <td><%= attachment_image_tag book.user, :profile_image,:fill,80,80, format: 'jpeg', fallback: "no_image.jpg" %></td>
+          <td><%= book.comment %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+<br>
+
+<div class="form-group">
+    <%= form_for [@book, @book_comment] do |f| %>
+      <div class="row">
+        <%= f.text_area :comment,rows:'5',class:"form-control" %>
+      </div><br>
+
+      <%= f.submit "送信する", class: "btn btn-lg btn-primary" %>
+    <% end %>
+</div>    
+</div>
+  </div>

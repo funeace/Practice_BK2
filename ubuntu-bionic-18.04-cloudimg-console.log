@@ -1,0 +1,44 @@
+[232920.816510] invalid opcode: 0000 [#1] SMP PTI
+[232920.820273] Modules linked in: ufs msdos xfs vboxsf(OE) isofs vboxguest(OE) input_leds serio_raw video sch_fq_codel ib_iser rdma_cm iw_cm ib_cm ib_core iscsi_tcp libiscsi_tcp libiscsi scsi_transport_iscsi ip_tables x_tables autofs4 btrfs zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear crct10dif_pclmul crc32_pclmul ghash_clmulni_intel pcbc mptspi scsi_transport_spi mptscsih aesni_intel vboxvideo(OE) aes_x86_64 crypto_simd drm_kms_helper glue_helper cryptd syscopyarea sysfillrect sysimgblt fb_sys_fops psmouse mptbase e1000 ttm drm
+[232920.836048] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G           OE    4.15.0-76-generic #86-Ubuntu
+[232920.838389] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[232920.841038] RIP: 0010:add_interrupt_randomness+0x145/0x210
+[232920.842278] RSP: 0018:ffff95be3fd03f00 EFLAGS: 00010082
+[232920.844066] RAX: 0000000000000000 RBX: ffff95be3fd1fec0 RCX: 0000000000000003
+[232920.845950] RDX: ffffffff87cb7b20 RSI: ffff95be3fd1fed0 RDI: ffffffff8838ece0
+[232920.848037] RBP: ffff95be3fd03f20 R08: ffffffff8890d55c R09: 000000000000006f
+[232920.850038] R10: 000000000000007f R11: 000000000000001c R12: 0000000103778175
+[232920.851806] R13: ffffffff8845d660 R14: 0000000000000000 R15: ffffac10c01efdd8
+[232920.853748] FS:  0000000000000000(0000) GS:ffff95be3fd00000(0000) knlGS:0000000000000000
+[232920.857976] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[232920.861256] CR2: 00007f2f80320008 CR3: 0000000021e0a005 CR4: 00000000000606e0
+[232920.864580] Call Trace:
+[232920.865608]  <IRQ>
+[232920.866165]  handle_irq_event_percpu+0x40/0x80
+[232920.867460]  handle_irq_event+0x3b/0x60
+[232920.868417]  handle_fasteoi_irq+0x7c/0x130
+[232920.869491]  handle_irq+0x20/0x30
+[232920.870440]  do_IRQ+0x50/0xe0
+[232920.871379]  common_interrupt+0x8c/0x8c
+[232920.873390]  </IRQ>
+[232920.873994] RIP: 0010:native_safe_halt+0x12/0x20
+[232920.875297] RSP: 0018:ffffac10c01efe80 EFLAGS: 00010246 ORIG_RAX: ffffffffffffffd9
+[232920.878527] RAX: ffffffff877bdc30 RBX: 0000000000000001 RCX: 0000000000000000
+[232920.883510] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+[232920.893359] RBP: ffffac10c01efe80 R08: 000154a3a1b6e89a R09: ffff95be3cb4a200
+[232920.902936] R10: 0000000000000000 R11: 0000d4ac209c82fb R12: 0000000000000001
+[232920.910702] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[232920.920251]  ? __sched_text_end+0x1/0x1
+[232920.927003]  default_idle+0x20/0x100
+[232920.932684]  arch_cpu_idle+0x15/0x20
+[232920.936112]  default_idle_call+0x23/0x30
+[232920.938914]  do_idle+0x172/0x1f0
+[232920.942067]  cpu_startup_entry+0x73/0x80
+[232920.945024]  start_secondary+0x1ab/0x200
+[232920.947340]  secondary_startup_64+0xa5/0xb0
+[232920.949965] Code: c7 28 ed 38 88 e8 6c 6b 39 00 85 c0 74 d4 4c 89 63 10 ba 10 00 00 00 48 89 de 48 c7 c7 e0 ec 38 88 e8 80 ca ff ff 0f 1f 44 00 00 <48> 0f c7 f8 be 01 00 00 00 48 89 45 e0 73 1a 48 8d 75 e0 ba 08 
+[232920.957046] RIP: add_interrupt_randomness+0x145/0x210 RSP: ffff95be3fd03f00
+[232920.961053] ---[ end trace d409d6bb12a4c8ef ]---
+[232920.967487] Kernel panic - not syncing: Fatal exception in interrupt
+[232920.972443] Kernel Offset: 0x5e00000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[232920.977609] ---[ end Kernel panic - not syncing: Fatal exception in interrupt
